@@ -10,3 +10,11 @@ export type RequestError = {
   name: string;
   message: string;
 };
+
+export type CEPadress = {
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+};
