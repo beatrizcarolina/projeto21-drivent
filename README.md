@@ -73,4 +73,4 @@ You can operate on databases for different environments, but it is necessary to 
 
 There are several things you need to do when you add new ENV VARIABLES:
 - Add them to `.env.example` file
-- Add them to your local `.env.development` and `.env.test` files# drivent-back
+- Add them to your local `.env.development` and `.env.test` files
