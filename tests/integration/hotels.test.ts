@@ -63,6 +63,7 @@ describe('GET /hotels', () => {
       const user = await createUser();
       const token = await generateValidToken(user);
       await createEnrollmentWithAddress(user);
+      await createHotel();
 
       const response = await server.get('/hotels').set('Authorization', `Bearer ${token}`);
 
@@ -87,6 +88,7 @@ describe('GET /hotels', () => {
       const enrollment = await createEnrollmentWithAddress(user);
       const ticketType = await createTicketType();
       await createTicket(enrollment.id, ticketType.id, TicketStatus.RESERVED);
+      await createHotel();
 
       const response = await server.get('/hotels').set('Authorization', `Bearer ${token}`);
 
@@ -99,6 +101,7 @@ describe('GET /hotels', () => {
       const enrollment = await createEnrollmentWithAddress(user);
       const ticketType = await createTicketType(true, false);
       await createTicket(enrollment.id, ticketType.id, TicketStatus.PAID);
+      await createHotel();
      
       const response = await server.get('/hotels').set('Authorization', `Bearer ${token}`);
 
@@ -111,6 +114,7 @@ describe('GET /hotels', () => {
       const enrollment = await createEnrollmentWithAddress(user);
       const ticketType = await createTicketType(false, false);
       await createTicket(enrollment.id, ticketType.id, TicketStatus.PAID);
+      await createHotel();
 
       const response = await server.get('/hotels').set('Authorization', `Bearer ${token}`);
 
@@ -189,6 +193,7 @@ describe('GET /hotels/:hotelId', () => {
       const token = await generateValidToken(user);
       await createEnrollmentWithAddress(user);
       const hotel = await createHotel();
+      await createRoom(hotel.id);
 
       const response = await server.get(`/hotels/${hotel.id}`).set('Authorization', `Bearer ${token}`);
 
@@ -202,8 +207,9 @@ describe('GET /hotels/:hotelId', () => {
       const ticketType = await createTicketType(false, true);
       await createTicket(enrollment.id, ticketType.id, TicketStatus.PAID);
       const hotel = await createHotel();
+      await createRoom(hotel.id);
 
-      const response = await server.get(`/hotels/${hotel.id}`).set('Authorization', `Bearer ${token}`);
+      const response = await server.get(`/hotels/${hotel.id + 1}`).set('Authorization', `Bearer ${token}`);
 
       expect(response.status).toBe(httpStatus.NOT_FOUND);
     });
@@ -215,6 +221,7 @@ describe('GET /hotels/:hotelId', () => {
       const ticketType = await createTicketType();
       await createTicket(enrollment.id, ticketType.id, TicketStatus.RESERVED);
       const hotel = await createHotel();
+      await createRoom(hotel.id);
 
       const response = await server.get(`/hotels/${hotel.id}`).set('Authorization', `Bearer ${token}`);
 
@@ -228,6 +235,7 @@ describe('GET /hotels/:hotelId', () => {
       const ticketType = await createTicketType(false, false);
       await createTicket(enrollment.id, ticketType.id, TicketStatus.PAID);
       const hotel = await createHotel();
+      await createRoom(hotel.id);
 
       const response = await server.get(`/hotels/${hotel.id}`).set('Authorization', `Bearer ${token}`);
 
@@ -241,6 +249,7 @@ describe('GET /hotels/:hotelId', () => {
       const ticketType = await createTicketType(true, false);
       await createTicket(enrollment.id, ticketType.id, TicketStatus.PAID);
       const hotel = await createHotel();
+      await createRoom(hotel.id);
 
       const response = await server.get(`/hotels/${hotel.id}`).set('Authorization', `Bearer ${token}`);
 
