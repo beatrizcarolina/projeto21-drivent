@@ -13,9 +13,11 @@ async function getHotels(userId: number) {
 
   if (ticket.status !== 'PAID') throw paymentError('Payment Required');
 
-  if (ticket.TicketType.includesHotel === false) throw paymentError('Ticket does not include hotel');
+  const type = ticket.TicketType;
 
-  if (ticket.TicketType.isRemote === true) throw paymentError('Ticket is remote');
+  if (type.includesHotel === false) throw paymentError('Ticket does not include hotel');
+
+  if (type.isRemote === true) throw paymentError('Ticket is remote');
 
   return hotels;
 }
@@ -32,9 +34,11 @@ async function getHotelById(userId: number, hotelId: number) {
     
     if (ticket.status !== 'PAID') throw paymentError('Payment Required');
 
-    if (ticket.TicketType.includesHotel === false) throw paymentError('Ticket does not include hotel');
+    const type = ticket.TicketType;
 
-    if (ticket.TicketType.isRemote === true) throw paymentError('Ticket is remote');
+    if (type.includesHotel === false) throw paymentError('Ticket does not include hotel');
+
+    if (type.isRemote === true) throw paymentError('Ticket is remote');
  
     return hotel;
 }
