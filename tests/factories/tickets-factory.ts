@@ -7,8 +7,8 @@ export async function createTicketType(isRemote?: boolean, includesHotel?: boole
     data: {
       name: faker.name.findName(),
       price: faker.datatype.number(),
-      isRemote: isRemote === undefined ? faker.datatype.boolean() : isRemote,
-      includesHotel: includesHotel === undefined ? faker.datatype.boolean() : includesHotel,
+      isRemote: isRemote !== undefined ? isRemote : faker.datatype.boolean(),
+      includesHotel: includesHotel !== undefined ? includesHotel : faker.datatype.boolean(),
     },
   });
 }

@@ -58,7 +58,7 @@ export function handleApplicationErrors(
     return res.status(httpStatus.BAD_REQUEST).send(err.message);
   }
 
-  if(err.name === 'PaymentError') {
+  if (err.name === 'CannotListHotelsError') {
     return res.status(httpStatus.PAYMENT_REQUIRED).send(err.message);
   }
 

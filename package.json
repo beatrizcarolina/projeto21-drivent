@@ -13,6 +13,7 @@
     "lint": "eslint .",
     "lint:staged": "lint-staged",
     "test": "cross-env NODE_ENV=test jest --passWithNoTests --runInBand",
+    "test:coverage": "npm run test:load-envs -- jest -- --coverage --runInBand",
     "test:migration:run": "npm run test:load-envs prisma migrate deploy",
     "test:migration:generate": "npm run test:load-envs prisma migrate dev",
     "test:watch": "jest --watch --passWithNoTests --runInBand",
