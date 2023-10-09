@@ -10,6 +10,7 @@ async function getByUserId(userId: number) {
 
 async function createBooking(userId: number, roomId: number) {
     const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
+    if(!enrollment) throw forbiddenError('User does not have a enrollment');
 
     const ticket = await ticketsRepository.findTicketByEnrollmentId(enrollment.id);
     if (ticket.TicketType.isRemote) throw forbiddenError('Ticket is remote');
@@ -28,7 +29,7 @@ async function createBooking(userId: number, roomId: number) {
 }
 
 async function  updateBooking(userId: number, bookingId: number, roomId: number) {
-    const booking = await getByUserId(userId);
+    const booking = await bookingRepository.findById(userId);
     if(!booking) throw notFoundError;
     if(booking.id !== bookingId) throw forbiddenError('Booking id does not match');
 
