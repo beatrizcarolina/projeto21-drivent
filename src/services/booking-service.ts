@@ -10,10 +10,10 @@ async function getByUserId(userId: number) {
 
 async function createBooking(userId: number, roomId: number) {
     const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
-    if(!enrollment) throw forbiddenError('User does not have a enrollment');
+    if(!enrollment) throw forbiddenError('User does not have enrollment');
 
     const ticket = await ticketsRepository.findTicketByEnrollmentId(enrollment.id);
-    if (!ticket) throw forbiddenError('User does not have a ticket');
+    if (!ticket) throw forbiddenError('User does not have ticket');
     if (ticket.TicketType.isRemote) throw forbiddenError('Ticket is remote');
     if (!ticket.TicketType.includesHotel) throw forbiddenError('Ticket does not include hotel');
     if (ticket.status !== 'PAID') throw forbiddenError('Ticket not paid');
@@ -31,8 +31,8 @@ async function createBooking(userId: number, roomId: number) {
 
 async function  updateBooking(userId: number, bookingId: number, roomId: number) {
     const booking = await bookingRepository.findById(userId);
-    if(!booking) throw forbiddenError('User doesnt have a booking');
-    if(booking.id !== bookingId) throw forbiddenError('Booking id doesnt match');
+    if(!booking) throw forbiddenError('User does not have booking');
+    if(booking.id !== bookingId) throw forbiddenError('Booking id does not match');
 
     const room = await hotelRepository.findRoomsWithBooking(roomId);
     if (!room) throw notFoundError();

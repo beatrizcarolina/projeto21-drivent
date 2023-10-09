@@ -26,7 +26,7 @@ describe('getByUserId', () => {
     const promise = bookingService.getByUserId(1);
     expect(promise).rejects.toEqual({
       name: 'NotFoundError',
-      //message: 'Booking not found',
+      message: 'No result for this search!',
     });
   });
 
@@ -193,7 +193,7 @@ describe('create', () => {
 
     expect(promise).rejects.toEqual({
       name: 'NotFoundError',
-      //message: 'Room not found',
+      message: 'No result for this search!',
     });
   });
 
@@ -304,7 +304,7 @@ describe('updateBooking', () => {
 
     expect(promise).rejects.toEqual({
       name: 'NotFoundError',
-      //message: 'Room not found',
+      message: 'No result for this search!',
     });
   });
 
